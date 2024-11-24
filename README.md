@@ -14,7 +14,7 @@
 **[2024.10.24]** This work is an extension of our preliminary work [Exp-BLIP](https://github.com/Yujianyuan/Exp-BLIP).
 
 
-## ⬇️ Captions and Models Download
+## ⬇️ Data and Models Download
 
 
 ### <div id="custom-id">(1) Sythesized VQA pairs</div>
