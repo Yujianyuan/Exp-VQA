@@ -17,8 +17,8 @@ image = vis_processors["eval"](raw_image).unsqueeze(0).to(device)
 # input your question
 question = "How can this person's emotion be inferred from their facial actions?"
 
-# generate caption
-print('[1 caption]:',model.generate({"image": image, "prompt":question}))
+# generate answer
+print('[1 answer]:',model.generate({"image": image, "prompt":question}))
 
 # use nucleus sampling for diverse outputs 
-print('[3 captions]:',model.generate({"image": image, "prompt":question}, use_nucleus_sampling=True, num_captions=3))
+print('[3 answers]:',model.generate({"image": image, "prompt":question}, use_nucleus_sampling=True, num_captions=3))
