@@ -33,11 +33,82 @@
 | Exp-VQA(fz)             |     [OneDrive]    |
 
 
+## 🔨 Installation
+
+1. (Optional) Creating conda environment
+
+```bash
+conda create -n expvqa python=3.8.12
+conda activate expvqa
+```
+
+2. Download the packages in requirements.txt 
+
+```bash
+pip install -r requirements.txt 
+```
+
+3. Download this repo. 
+```bash
+git clone https://github.com/Yujianyuan/Exp-VQA.git
+cd Exp-VQA
+```
+
+## 🚀 Getting started
+
+### (1) Training
+
+You should finish the two training steps sequentially for training.
+
+1. fill the blank labeled by 'TODO' in Exp-BLIP/mylavis/projects/blip2/train/pretrain_stage1_vitg.yaml
+
+2. training for step-1
+```bash
+python -m torch.distributed.run --nproc_per_node=4 train.py --cfg-path mylavis/projects/blip2/train/pretrain_stage1_vitg.yaml
+```
+
+3. fill the blank labeled by 'TODO' in Exp-BLIP/mylavis/projects/blip2/train/caption_exp_ft.yaml
+
+4. training for step-2
+```bash
+python -m torch.distributed.run --nproc_per_node=4 train.py --cfg-path mylavis/projects/blip2/train/caption_exp_ft.yaml
+```
+### (2) Test
+
+1. in test.py, finish the image path and model path
+```python
+import torch
+from PIL import Image
+from mylavis.models import my_load_model_and_preprocess
+
+# load sample image
+raw_image = Image.open("figs/happy.png").convert("RGB")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# set max output length
+max_len = 200 
+# loads AU/Emot/Exp-BLIP model
+# this also loads the associated image processors
+checkpoint_path = './exp_blip_vitg_opt6.7b_trimmed.pth'
+model, vis_processors, _ = my_load_model_and_preprocess(name="blip2_opt",
+                model_type="caption_coco_opt6.7b", dict_path = dict_path, is_eval=True, device=device)
+# preprocess the image
+# vis_processors stores image transforms for "train" and "eval" 
+image = vis_processors["eval"](raw_image).unsqueeze(0).to(device)
+# generate caption
+print('[1 caption]:',model.generate({"image": image},max_length=max_len))
+
+# use nucleus sampling for diverse outputs 
+print('[3 captions]:',model.generate({"image": image}, use_nucleus_sampling=True, num_captions=3,max_length=max_len))
+```
+Then run it, you can get the captions.
+```bash
+python test.py
+```
 
 
 
-
-
+## 🤝 Acknowledgement
+This work is supported by National Natural Science Foundation of China (No. 62176248). We also thank ICT computing platform for providing GPUs. We thank Salesforce Research sharing the code of InstructBLIP via [LAVIS](https://github.com/salesforce/LAVIS). Our codes are based on LAVIS.
 
 
 
