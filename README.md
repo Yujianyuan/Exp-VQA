@@ -58,20 +58,13 @@ cd Exp-VQA
 
 ### (1) Training
 
-You should finish the two training steps sequentially for training.
+You should finish the two steps sequentially for training.
 
-1. fill the blank labeled by 'TODO' in Exp-BLIP/mylavis/projects/blip2/train/pretrain_stage1_vitg.yaml
+1. fill the blank labeled by 'TODO' in Exp-VQA/mylavis/projects/blip2/train/vqa_ft_vicuna7b_vqa.yaml
 
-2. training for step-1
+2. training for Exp-VQA
 ```bash
-python -m torch.distributed.run --nproc_per_node=4 train.py --cfg-path mylavis/projects/blip2/train/pretrain_stage1_vitg.yaml
-```
-
-3. fill the blank labeled by 'TODO' in Exp-BLIP/mylavis/projects/blip2/train/caption_exp_ft.yaml
-
-4. training for step-2
-```bash
-python -m torch.distributed.run --nproc_per_node=4 train.py --cfg-path mylavis/projects/blip2/train/caption_exp_ft.yaml
+python -m torch.distributed.run --nproc_per_node=4 train.py --cfg-path mylavis/projects/blip2/train/vqa_ft_vicuna7b_vqa.yaml
 ```
 ### (2) Test
 
@@ -82,23 +75,25 @@ from PIL import Image
 from mylavis.models import my_load_model_and_preprocess
 
 # load sample image
-raw_image = Image.open("figs/happy.png").convert("RGB")
+raw_image = Image.open("figs/happy.jpg").convert("RGB")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# set max output length
-max_len = 200 
-# loads AU/Emot/Exp-BLIP model
+# loads Exp-VQA model
 # this also loads the associated image processors
-checkpoint_path = './exp_blip_vitg_opt6.7b_trimmed.pth'
-model, vis_processors, _ = my_load_model_and_preprocess(name="blip2_opt",
-                model_type="caption_coco_opt6.7b", dict_path = dict_path, is_eval=True, device=device)
+checkpoint_path = './exp_vqa_trimmed.pth'
+model, vis_processors, _ = my_load_model_and_preprocess(name="blip2_vicuna_instruct",
+                model_type="vicuna7b", dict_path = checkpoint_path, is_eval=True, device=device)
 # preprocess the image
 # vis_processors stores image transforms for "train" and "eval" 
 image = vis_processors["eval"](raw_image).unsqueeze(0).to(device)
+
+# input your question
+question = "How can this person's emotion be inferred from their facial actions?"
+
 # generate caption
-print('[1 caption]:',model.generate({"image": image},max_length=max_len))
+print('[1 caption]:',model.generate({"image": image, "prompt":question}))
 
 # use nucleus sampling for diverse outputs 
-print('[3 captions]:',model.generate({"image": image}, use_nucleus_sampling=True, num_captions=3,max_length=max_len))
+print('[3 captions]:',model.generate({"image": image, "prompt":question}, use_nucleus_sampling=True, num_captions=3))
 ```
 Then run it, you can get the captions.
 ```bash
