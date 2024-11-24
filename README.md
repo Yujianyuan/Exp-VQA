@@ -29,8 +29,8 @@
 ### (2) Trained models
 | Model                         |                                                    Link                                                    |
 |:------------------------------------|:-------------------------------------------------------------------------------------------------------:| 
-| Exp-VQA    			|     [OneDrive](https://1drv.ms/u/s!Atl7YPj4ORSRjfAxeMouMlluoe9jcg?e=cM3hhd)|
-| Exp-VQA(fz)             |     [OneDrive]    |
+| Exp-VQA    			|     [OneDrive]()|
+| Exp-VQA(fz)             |     [OneDrive](https://1drv.ms/u/c/911439f8f8607bd9/EZLg4kUnqiNPpyuFFxko_nEB4MWSP2zku8go9nZRczkbDw?e=xbH3UD)    |
 
 
 ## 🔨 Installation
