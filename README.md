@@ -1,4 +1,4 @@
-# Official PyTorch Implementation of Exp-VQA (Pattern Recongition submission).
+# Official PyTorch Implementation of Exp-VQA (Pattern Recognition 2025).
 
 > [**Exp-VQA: Fine-grained Facial Expression Analysis via Visual Question Answering**]<br>
 > [Yujian Yuan](https://vipl.ict.ac.cn/edu/student/master/202210/t20221019_123529.html), [Jiabei Zeng](https://vipl.ict.ac.cn/edu/teacher/mastersupvisor/202205/t20220517_35778.html), [Shiguang Shan](https://scholar.google.com/citations?user=Vkzd7MIAAAAJ&hl=zh-CN)<br>Institute of Computing Technology, Chinese Academy of Sciences;
@@ -8,6 +8,7 @@
 
 ## 📰 News
 
+**[2025.4.28]** Exp-VQA is accepted by **Pattern Recognition 2025** (IF: 7.5) ! 🎉 <br>
 **[2024.11.24]** Training and test codes of Exp-VQA are available. <br>
 **[2024.11.24]** Sythesized VQA pairs used for training are available. <br>
 **[2024.10.24]** ~~Code and trained models will be released here.~~ Welcome to **watch** this repository for the latest updates. <br>
