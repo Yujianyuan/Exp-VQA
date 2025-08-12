@@ -101,7 +101,19 @@ Then run it, you can get the answers.
 python test.py
 ```
 
+## ✏️ Citation
+If you find this work useful for your research, please feel free to leave a star⭐️ and cite our paper:
 
+```bibtex
+@article{yuan2025exp,
+  title={Exp-VQA: fine-grained facial expression analysis via visual question answering},
+  author={Yuan, Yujian and Zeng, Jiabei and Shan, Shiguang},
+  journal={Pattern Recognition},
+  pages={111783},
+  year={2025},
+  publisher={Elsevier}
+}
+```
 
 ## 🤝 Acknowledgement
 This work is supported by National Natural Science Foundation of China (No. 62176248). We also thank ICT computing platform for providing GPUs. We thank Salesforce Research sharing the code of InstructBLIP via [LAVIS](https://github.com/salesforce/LAVIS). Our codes are based on LAVIS.
